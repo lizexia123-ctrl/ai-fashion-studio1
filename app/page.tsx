@@ -21,13 +21,27 @@ export default function Home() {
     setError("");
   }
 
+  async function resizeForModel(file: File): Promise<Blob> {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 511 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("图片处理失败，请换一张图片重试。");
+    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+    return await new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("图片压缩失败，请重试。")), "image/jpeg", 0.88));
+  }
+
   async function generate() {
     if (!person.file || !pose.file || !outfit.file) { setError("请先上传人物、姿势和服装三张参考图。"); return; }
     if (person.file.size + pose.file.size + outfit.file.size > 4 * 1024 * 1024) { setError("三张图片合计不能超过 4MB。"); return; }
     setBusy(true); setError(""); setResult("");
     try {
+      const [personSmall, poseSmall, outfitSmall] = await Promise.all([resizeForModel(person.file), resizeForModel(pose.file), resizeForModel(outfit.file)]);
       const body = new FormData();
-      body.append("person", person.file); body.append("pose", pose.file); body.append("outfit", outfit.file); body.append("prompt", prompt);
+      body.append("person", personSmall, "person.jpg"); body.append("pose", poseSmall, "pose.jpg"); body.append("outfit", outfitSmall, "outfit.jpg"); body.append("prompt", prompt);
       const response = await fetch("/api/generate", { method: "POST", body });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "生成失败，请稍后重试。");
