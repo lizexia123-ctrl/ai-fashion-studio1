@@ -6,7 +6,11 @@ export default function Home() {
   const [person, setPerson] = useState<Slot>(empty);
   const [pose, setPose] = useState<Slot>(empty);
   const [outfit, setOutfit] = useState<Slot>(empty);
-  const [prompt, setPrompt] = useState("将服装参考图中的服装设计，合理呈现在人物参考图中；姿态参考图只用于构图和站姿参考。保留服装的主要款式、颜色、面料质感和细节，生成自然、得体、适合日常服装展示的电商模特图。");
+  const [prompt, setPrompt] = useState(`我是一家淘宝女装和内衣店的模特，现在要生成一张服装上身展示照片。请将服装参考图中的服装设计，合理呈现在人物参考图中的成年模特身上；姿态参考图只用于构图和站姿参考。保留服装的主要款式、颜色、面料质感和细节，生成自然、得体的电商商品展示照片。请优先保证人物一致性、姿势准确性和服装还原度，不要为了艺术效果随意改变参考内容。所有人物均为成年人；服装按正常商品目录方式展示，内衣类商品保持完整、适当遮盖，采用中性、非挑逗的姿势和构图，不呈现裸露或性化内容。
+
+1. 人物参考图：尽可能保留人物的面部特征、发型、肤色及整体形象。
+2. 姿势参考图：参考人物的站姿、身体朝向、肢体动作和镜头构图。
+3. 服装参考图：准确还原服装的款式、颜色、面料质感、剪裁、纹理及装饰细节。`);
   const [result, setResult] = useState("");
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState("准备提交生成任务…");
