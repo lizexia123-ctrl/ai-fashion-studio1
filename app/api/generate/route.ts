@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       "Image 1 is the person reference; image 2 is only a pose and composition reference; image 3 is the clothing design reference.",
       "Apply the clothing design from image 3 to the person in image 1 while using a similar natural, non-suggestive pose and composition to image 2.",
       "Preserve garment construction, color, pattern, fabric appearance and visible details as faithfully as possible.",
-      "Keep the subject fully clothed in tasteful everyday fashion. No nudity, lingerie, sexualized styling, or suggestive posing.",
+      "Present the subject in age-appropriate, fully clothed everyday fashion with a natural, confident, non-suggestive pose.",
       "Use a clean professional fashion-catalog presentation. Do not add text, logos, watermarks, or unrelated accessories.",
       "User brief: " + brief
     ].join("\n");
