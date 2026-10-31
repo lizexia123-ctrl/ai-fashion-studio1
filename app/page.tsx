@@ -23,7 +23,7 @@ export default function Home() {
 
   async function resizeForModel(file: File): Promise<Blob> {
     const bitmap = await createImageBitmap(file);
-    const scale = Math.min(1, 511 / Math.max(bitmap.width, bitmap.height));
+    const scale = Math.min(1, 1024 / Math.max(bitmap.width, bitmap.height));
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(bitmap.width * scale));
     canvas.height = Math.max(1, Math.round(bitmap.height * scale));
@@ -31,7 +31,7 @@ export default function Home() {
     if (!context) throw new Error("图片处理失败，请换一张图片重试。");
     context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
     bitmap.close();
-    return await new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("图片压缩失败，请重试。")), "image/jpeg", 0.88));
+    return await new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("图片压缩失败，请重试。")), "image/jpeg", 0.92));
   }
 
   async function generate() {
