@@ -65,7 +65,6 @@ export default function Home() {
     </article>)}</section>
     <section className="promptBox"><div className="sectionTitle"><div><p className="eyebrow">DESIGN BRIEF</p><h3>创作要求</h3></div><span>可自行调整</span></div>
       <textarea value={prompt} onChange={e => setPrompt(e.target.value)} maxLength={1800} />
-      <p className="note">请使用你有权使用的图片。生成结果用于服装创意参考；请保持人物着装得体，不使用裸露或性化内容。</p>
       <button className="generate" onClick={generate} disabled={busy}>{busy ? "正在生成，请稍候…" : "✦ 生成服装创意图"}</button>
       {busy && <p className="note" aria-live="polite">{progress}</p>}{error && <p className="error">{error}</p>}
     </section>
