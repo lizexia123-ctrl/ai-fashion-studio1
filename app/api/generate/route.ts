@@ -32,7 +32,9 @@ export async function POST(request: Request) {
       "Image 1 is the person reference; image 2 is only a pose and composition reference; image 3 is the clothing design reference.",
       "Apply the clothing design from image 3 to the person in image 1 while using a similar natural, non-suggestive pose and composition to image 2.",
       "Preserve garment construction, color, pattern, fabric appearance and visible details as faithfully as possible.",
-      "Present the subject in age-appropriate, fully clothed everyday fashion with a natural, confident, non-suggestive pose.",
+      "Aim for the boldest fashion-editorial look that remains clearly non-sexual and suitable for a general audience: contemporary silhouettes, stylish layering, tasteful color blocking, elegant tailoring, and fashion-forward but practical outfits.",
+      "Keep the subject fully clothed in opaque everyday or editorial clothing. Avoid nudity, lingerie, fetish styling, transparent garments over intimate areas, sexualized posing, or framing that emphasizes intimate body parts.",
+      "Show the outfit clearly and confidently through full-body or three-quarter fashion photography, with natural posture and balanced composition. Prioritize garment design, fit, fabric, and styling rather than body exposure."
       "Use a clean professional fashion-catalog presentation. Do not add text, logos, watermarks, or unrelated accessories.",
       "User brief: " + brief
     ].join("\n");
